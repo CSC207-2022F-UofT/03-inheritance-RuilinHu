@@ -5,6 +5,10 @@
  * 1. Introduction to Java helpful.
  */
 
+import java.security.KeyStore;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public abstract class Bag {
     /*
      * TODO: Create the following private instance variables
@@ -13,6 +17,11 @@ public abstract class Bag {
      *       - an int named capacity
      *       - an array of Strings named contents
      */
+
+    private String color;
+    private int numberOfContents;
+    private int capacity;
+    private String[] contents;
 
 
 
@@ -27,6 +36,13 @@ public abstract class Bag {
      * its contents.)
      */
 
+    public Bag(String cl, int cp){
+        this.color = cl;
+        this.capacity = cp;
+        this.numberOfContents = 0;
+        this.contents = new String[this.capacity];
+    }
+
 
 
 
@@ -37,6 +53,15 @@ public abstract class Bag {
      *           - getNumberOfContents
      *           - getCapacity
      */
+    public String getColor(){
+        return this.color;
+    }
+    public int getNumberOfContents(){
+        return this.numberOfContents;
+    }
+    public int getCapacity(){
+        return this.capacity;
+    }
 
 
 
@@ -45,6 +70,10 @@ public abstract class Bag {
      * TODO: Create a setter function called setColor which sets the
      *       color of this bag to the given color.
      */
+
+    public void setColor(String cl){
+        this.color = cl;
+    }
 
 
 
@@ -61,6 +90,22 @@ public abstract class Bag {
      *       and false otherwise.
      */
 
+    public boolean addItem(String it){
+        if (this.numberOfContents < this.capacity){
+            for(int i = 0; i < this.contents.length; i++){
+                if (this.contents[i] == null){
+                    contents[i] = it;
+                    this.numberOfContents += 1;
+                    return true;
+                }
+            }
+
+
+
+        }
+        return false;
+    }
+
 
 
 
@@ -76,6 +121,18 @@ public abstract class Bag {
      * @return
      */
 
+    public String popItem(){
+        for(int i = 0; i < this.contents.length; i++){
+            if(this.contents[i] == null){
+                String item_pop = this.contents.clone()[i - 1];
+                this.contents[i - 1] = null;
+                this.numberOfContents -= 1;
+                return item_pop;
+            }
+        }
+        return null;
+    }
+
 
 
 
@@ -87,6 +144,7 @@ public abstract class Bag {
      */
     public void increaseCapacity(int n) {
         // TODO: Implement this method.
+        this.capacity += n;
 
     }
 
